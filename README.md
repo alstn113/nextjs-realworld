@@ -9,3 +9,6 @@ yarn add -D @emotion/babel-plugin
 
 //자주 사용하는 것 설치하고 정리
 yarn add axios react-query
+
+//react-hook-form
+yarn add react-hook-form yup @hookform/resolvers

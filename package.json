@@ -11,11 +11,14 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.8.8",
     "axios": "^0.26.1",
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-query": "^3.34.16"
+    "react-hook-form": "^7.27.1",
+    "react-query": "^3.34.16",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.7.2",

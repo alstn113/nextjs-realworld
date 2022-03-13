@@ -2,40 +2,67 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 const Header = () => {
   return (
-    <header>
+    <Wrapper>
       <Container>
-        <Link href={`/`}>
-          <a>CONDUIT</a>
-        </Link>
+        <Logo>
+          <Link href={`/`}>
+            <a>CONDUIT</a>
+          </Link>
+        </Logo>
         <Navbar>
-          <li>
-            <Link href={`/`}>
-              <a>Home</a>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/editor/new`}>
-              <a>New Post</a>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/user/settings`}>
-              <a>Settings</a>
-            </Link>
-          </li>
+          <ul>
+            <li>
+              <Link href={`/`}>
+                <a>Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={`/user/login`}>
+                <a>Sign in</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={`/user/register`}>
+                <a>Sign up</a>
+              </Link>
+            </li>
+          </ul>
         </Navbar>
       </Container>
-    </header>
+    </Wrapper>
   );
 };
+const Wrapper = styled('header')`
+  padding: 0.5rem 1rem;
+`;
 
 const Container = styled('div')`
+  max-width: 1024px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
 `;
 
-const Navbar = styled('ul')`
-  display: flex;
+const Logo = styled('div')`
+  a {
+    color: #5cb85c;
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: 700;
+  }
+`;
+
+const Navbar = styled('nav')`
+  ul {
+    display: flex;
+    li {
+      margin: 0 1rem;
+      line-height: 1.5;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
 `;
 
 export default Header;
