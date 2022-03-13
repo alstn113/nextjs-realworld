@@ -10,7 +10,9 @@ import { ThemeProvider } from '@emotion/react';
 import theme from '@/styles/theme';
 import GlobalStyle from '@/styles/global-style';
 
-function MyApp({ Component, pageProps }: AppProps) {
+import Layout from '@/components/common/Layout';
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -28,11 +30,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>
   );
-}
+};
 
 export default MyApp;

@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { SERVER_BASE_URL } from '@/lib/utils/constant';
 
 const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_ENDPOINT,
+  baseURL: SERVER_BASE_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
