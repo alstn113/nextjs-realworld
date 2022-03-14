@@ -1,16 +1,17 @@
 import client from '@/utils/axios';
+import clientPrivate from '@/utils/axiosPrivate';
 
-export const getAllArticle = async () => {
-  const { data } = await client.get(`/articles`);
+export const getAllArticles = async () => {
+  const { data } = await clientPrivate.get(`/articles`);
   return data;
 };
 
-export const getArticleByAuhor = async () => {
+export const getArticlesByAuhor = async () => {
   const { data } = await client.get(`/articles?author=abc`);
   return data;
 };
 
-export const getArticleByTag = async () => {
+export const getArticlesByTag = async () => {
   const { data } = await client.get(`/articles?tag=abc`);
   return data;
 };

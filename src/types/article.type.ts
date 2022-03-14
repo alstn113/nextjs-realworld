@@ -1,3 +1,5 @@
+import { AuthorType } from './author.type';
+
 export interface ArticleList {
   articles: ArticleType[];
 }
@@ -7,21 +9,14 @@ export interface Article {
 }
 
 export type ArticleType = {
-  tagList: string[];
-  createdAt: number;
-  author: Author;
-  description: string;
   title: string;
+  author: AuthorType;
+  description: string;
   body: string;
   slug: string;
-  updatedAt: number;
-  favoritesCount: number;
+  tagList: string[];
   favorited: boolean;
-};
-
-export type Author = {
-  username: string;
-  bio: string;
-  image: string;
-  following: boolean;
+  favoritesCount: number;
+  createdAt: number;
+  updatedAt: number;
 };

@@ -1,19 +1,14 @@
+import { AuthorType } from './author.type';
+
 export interface Comments {
   comments: CommentType[];
 }
 
 export type CommentType = {
-  createdAt: number;
   id: string;
   body: string;
   slug: string;
-  author: Author;
+  author: AuthorType;
+  createdAt: number;
   updatedAt: number;
-};
-
-export type Author = {
-  username: string;
-  bio: string;
-  image: string;
-  following: boolean;
 };
