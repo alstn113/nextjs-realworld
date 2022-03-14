@@ -1,3 +1,6 @@
+import { signup } from '@/api/user';
+import { useState } from 'react';
+
 //emotion
 import styled from '@emotion/styled';
 
@@ -5,6 +8,7 @@ import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useRouter } from 'next/router';
 
 interface IForminputs {
   username: string;
@@ -19,6 +23,8 @@ const schema = yup.object().shape({
 });
 
 const RegisterForm = () => {
+  const [error, setError] = useState('');
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -28,12 +34,28 @@ const RegisterForm = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data: IForminputs) => {
-    console.log(data);
+  const onSubmit = async (input: IForminputs) => {
+    try {
+      const { data, status } = await signup(
+        input.username,
+        input.email,
+        input.password,
+      );
+      if (status !== 200 && data?.errors) {
+        setError(data.errors);
+      }
+      if (data?.user) {
+        window.localStorage.setItem('user', JSON.stringify(data.user));
+        router.push('/');
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div>
+      <div>{JSON.stringify(error)}</div>
       <Form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div>USERNAME</div>
         <input {...register('username')} />

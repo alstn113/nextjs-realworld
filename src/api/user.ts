@@ -1,9 +1,20 @@
 import client from '@/utils/axios';
 
-export const login = async (email, password) => {
+interface SigninReqeust {
+  email: string;
+  password: string;
+}
+
+interface SignupRequest {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export const signin = async (data: SigninReqeust) => {
   try {
     const response = await client.post('/users/login', {
-      user: { email, password },
+      user: data,
     });
     return response;
   } catch (error: any) {
@@ -11,7 +22,13 @@ export const login = async (email, password) => {
   }
 };
 
-export const register = async () => {
-  const { data } = await client.get(`/articles`);
-  return data;
+export const signup = async (data: SignupRequest) => {
+  try {
+    const response = await client.post('/users', {
+      user: data,
+    });
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
 };

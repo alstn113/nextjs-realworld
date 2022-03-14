@@ -1,3 +1,7 @@
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { signin } from '@/api/user';
+
 //emotion
 import styled from '@emotion/styled';
 
@@ -5,9 +9,7 @@ import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { login } from '@/api/user';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
 interface IForminputs {
   email: string;
@@ -22,6 +24,7 @@ const schema = yup.object().shape({
 const LoginForm = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -31,21 +34,26 @@ const LoginForm = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = async (input: IForminputs) => {
-    try {
-      const { data, status } = await login(input.email, input.password);
-
-      if (status !== 200) {
-        setError(data.errors);
+  const mutation = useMutation('signin', (body: IForminputs) => signin(body), {
+    onSuccess: async data => {
+      try {
+        if (data.status !== 200) {
+          setError(data.errors);
+        }
+        console.log(data);
+        if (data?.data?.user) {
+          window.localStorage.setItem('user', JSON.stringify(data.data.user));
+          await queryClient.setQueryData('user', data.data.user);
+          router.push('/');
+        }
+      } catch (error) {
+        console.error(error);
       }
+    },
+  });
 
-      if (data?.user) {
-        window.localStorage.setItem('user', JSON.stringify(data.user));
-        router.push('/');
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const onSubmit = async (data: IForminputs) => {
+    mutation.mutate(data);
   };
 
   return (

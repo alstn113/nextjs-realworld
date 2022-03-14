@@ -1,6 +1,13 @@
+import checkLogin from '@/utils/checkLogin';
+import storage from '@/utils/storage';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { useQuery } from 'react-query';
+import Maybe from './Maybe';
+
 const Header = () => {
+  const { data: currentUser } = useQuery('user', () => storage('user'));
+  const isLoggedIn = checkLogin(currentUser);
   return (
     <Wrapper>
       <Container>
@@ -16,16 +23,35 @@ const Header = () => {
                 <a>Home</a>
               </Link>
             </li>
-            <li>
-              <Link href={`/user/login`}>
-                <a>Sign in</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={`/user/register`}>
-                <a>Sign up</a>
-              </Link>
-            </li>
+            <Maybe test={isLoggedIn}>
+              <li>
+                <Link href={`/editor/new`}>
+                  <a>New Post</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/user/settings`}>
+                  <a>Settings</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/profile/${currentUser?.username}`}>
+                  <a>{currentUser?.username}</a>
+                </Link>
+              </li>
+            </Maybe>
+            <Maybe test={!isLoggedIn}>
+              <li>
+                <Link href={`/user/login`}>
+                  <a>Sign in</a>
+                </Link>
+              </li>
+              <li>
+                <Link href={`/user/register`}>
+                  <a>Sign up</a>
+                </Link>
+              </li>
+            </Maybe>
           </ul>
         </Navbar>
       </Container>
