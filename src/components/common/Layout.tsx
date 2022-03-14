@@ -10,7 +10,7 @@ const Layout = ({ children }: PageProps) => {
     <>
       <Header />
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

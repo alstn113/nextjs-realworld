@@ -2,6 +2,7 @@ import { getAllArticle } from '@/api/article';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import LoadingSpinner from '../common/LoadingSpinner';
+import ArticlePreview from './ArticlePreview';
 
 const ArticleList = () => {
   const router = useRouter();
@@ -15,7 +16,7 @@ const ArticleList = () => {
   return (
     <div>
       {articles.map(article => (
-        <div>{article.slug}</div>
+        <ArticlePreview key={article.slug} article={article} />
       ))}
     </div>
   );
