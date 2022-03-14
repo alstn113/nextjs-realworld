@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { AppProps } from 'next/app';
-import { wrapper } from '@/app/store';
 
 // react-query
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
@@ -40,4 +39,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

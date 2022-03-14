@@ -7,10 +7,6 @@ yarn add @emotion/react @emotion/styled
 yarn add -D @emotion/babel-plugin
 .babelrc설정
 
-// redux@toolkit 설정
-yarn add @reduxjs/toolkit next-redux-wrapper react-redux
-yarn add -D @types/react-redux
-
 // 자주 사용하는 것 설치하고 정리
 yarn add axios react-query
 
