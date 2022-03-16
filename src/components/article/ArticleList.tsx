@@ -7,12 +7,15 @@ import ArticlePreview from './ArticlePreview';
 const ArticleList = () => {
   const router = useRouter();
   const { asPath, pathname, query } = router;
-  const { favorite, follow, tag, id } = query;
+  const { favorite, follow, tag, pid } = query;
 
-  const { data, error, isLoading } = useQuery('useGetArticle', getAllArticles);
+  const { data, error, isLoading } = useQuery(
+    ['useGetArticle', router.query],
+    () => getAllArticles(router.query),
+  );
   if (error) return <div>{error?.message}</div>;
   if (isLoading) return <LoadingSpinner />;
-  const { articles, articlesCount } = data;
+  const { articles } = data;
   return (
     <div>
       {articles.map(article => (

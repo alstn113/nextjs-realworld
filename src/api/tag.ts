@@ -1,7 +1,10 @@
 import client from '@/utils/axios';
-import { useQuery } from 'react-query';
 
-export const getAllTags = async () => {
-  const { data } = await client.get(`/tags`);
-  return data;
+const TagAPI = {
+  getAllTags: async () => {
+    const response = await client.get(`/tags`);
+    return response.data;
+  },
 };
+
+export default TagAPI;
