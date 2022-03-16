@@ -1,4 +1,4 @@
-import { getAllArticles } from '@/api/article';
+import ArticleAPI from '@/api/article';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import LoadingSpinner from '../common/LoadingSpinner';
@@ -11,7 +11,7 @@ const ArticleList = () => {
 
   const { data, error, isLoading } = useQuery(
     ['useGetArticle', router.query],
-    () => getAllArticles(router.query),
+    () => ArticleAPI.getAll(router.query),
   );
   if (error) return <div>{error?.message}</div>;
   if (isLoading) return <LoadingSpinner />;

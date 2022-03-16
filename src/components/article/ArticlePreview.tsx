@@ -1,10 +1,12 @@
-import { Article } from '@/types/article.type';
+import { IArticle } from '@/types/article.type';
 import styled from '@emotion/styled';
 
-interface Pageprops extends Article {}
+interface Pageprops {
+  article: IArticle;
+}
 
 const ArticlePreview = ({ article }: Pageprops) => {
-  if (!article) return;
+  if (!article) return <div>not exists</div>;
 
   return (
     <Wrapper>

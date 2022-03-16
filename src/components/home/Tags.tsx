@@ -1,10 +1,10 @@
-import { getAllTags } from '@/api/tag';
+import TagAPI from '@/api/tag';
 import Link from 'next/link';
 import { useQuery } from 'react-query';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const Tags = () => {
-  const { data, error, isLoading } = useQuery('getAllTags', getAllTags);
+  const { data, error, isLoading } = useQuery('getAllTags', TagAPI.getAllTags);
   if (error) return <div>{error?.message}</div>;
   if (isLoading) return <LoadingSpinner />;
 

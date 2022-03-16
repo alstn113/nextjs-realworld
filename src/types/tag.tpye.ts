@@ -1,3 +1,3 @@
-export interface TagList {
+export interface ITagList {
   tags: string[];
 }

@@ -1,4 +1,4 @@
-export type AuthorType = {
+export type IAuthor = {
   username: string;
   bio: string;
   image: string;

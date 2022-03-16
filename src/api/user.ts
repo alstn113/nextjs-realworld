@@ -1,19 +1,8 @@
 import client from '@/utils/axios';
 import clientPrivate from '@/utils/axiosPrivate';
 
-interface SigninReqeust {
-  email: string;
-  password: string;
-}
-
-interface SignupRequest {
-  username: string;
-  email: string;
-  password: string;
-}
-
 const UserAPI = {
-  myInfo: async () => {
+  current: async () => {
     try {
       const response = await clientPrivate.get('/user');
       return response.data;
@@ -21,20 +10,20 @@ const UserAPI = {
       return error.response;
     }
   },
-  signin: async (data: SigninReqeust) => {
+  signin: async body => {
     try {
       const response = await client.post('/users/login', {
-        user: data,
+        user: body,
       });
       return response.data;
     } catch (error: any) {
       return error.response;
     }
   },
-  signup: async (data: SignupRequest) => {
+  signup: async body => {
     try {
       const response = await client.post('/users', {
-        user: data,
+        user: body,
       });
       return response.data;
     } catch (error: any) {
@@ -59,6 +48,7 @@ const UserAPI = {
   },
   get: async username => {
     const response = await client.get(`/profiles/${username}`);
+    return response.data;
   },
 };
 

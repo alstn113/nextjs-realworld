@@ -1,16 +1,12 @@
-import { AuthorType } from './author.type';
+import { IAuthor } from './author.type';
 
-export interface ArticleList {
-  articles: ArticleType[];
+export interface IArticleList {
+  articles: IArticle[];
 }
 
-export interface Article {
-  article: ArticleType;
-}
-
-export type ArticleType = {
+export interface IArticle {
   title: string;
-  author: AuthorType;
+  author: IAuthor;
   description: string;
   body: string;
   slug: string;
@@ -19,4 +15,4 @@ export type ArticleType = {
   favoritesCount: number;
   createdAt: number;
   updatedAt: number;
-};
+}

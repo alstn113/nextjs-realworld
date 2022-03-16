@@ -1,14 +1,14 @@
-import { AuthorType } from './author.type';
+import { IAuthor } from './author.type';
 
-export interface Comments {
-  comments: CommentType[];
+export interface IComments {
+  comments: IComment[];
 }
 
-export type CommentType = {
+export interface IComment {
   id: string;
   body: string;
   slug: string;
-  author: AuthorType;
+  author: IAuthor;
   createdAt: number;
   updatedAt: number;
-};
+}
