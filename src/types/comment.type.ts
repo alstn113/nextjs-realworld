@@ -1,6 +1,6 @@
 import { IAuthor } from './author.type';
 
-export interface IComments {
+export interface ICommentList {
   comments: IComment[];
 }
 

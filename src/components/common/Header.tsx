@@ -13,7 +13,7 @@ const Header = () => {
       <Container>
         <Logo>
           <Link href={`/`}>
-            <a>CONDUIT</a>
+            <a>REALWORLD</a>
           </Link>
         </Logo>
         <Navbar>

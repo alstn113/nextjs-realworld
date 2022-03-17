@@ -1,4 +1,4 @@
-import { signup } from '@/api/user';
+import UserAPI from '@/api/user';
 import { useState } from 'react';
 
 //emotion
@@ -36,11 +36,7 @@ const RegisterForm = () => {
 
   const onSubmit = async (input: IForminputs) => {
     try {
-      const { data, status } = await signup(
-        input.username,
-        input.email,
-        input.password,
-      );
+      const { data, status } = await UserAPI.signup(input);
       if (status !== 200 && data?.errors) {
         setError(data.errors);
       }
