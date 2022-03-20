@@ -1,4 +1,5 @@
 import { IAuthor } from '@/types/author.type';
+import styled from '@emotion/styled';
 import NavLink from '../common/NavLink';
 
 interface Pageprops {
@@ -8,7 +9,7 @@ interface Pageprops {
 const ProfileTab = ({ profile }: Pageprops) => {
   return (
     <div>
-      <ul>
+      <List>
         <li>
           <NavLink href="/profile/[pid]" as={`/profile/${profile.username}`}>
             My Articles
@@ -22,9 +23,17 @@ const ProfileTab = ({ profile }: Pageprops) => {
             Favorited Articles
           </NavLink>
         </li>
-      </ul>
+      </List>
     </div>
   );
 };
+
+const List = styled('ul')`
+  display: flex;
+  li {
+    list-style-type: none;
+    padding: 0.5rem 1rem;
+  }
+`;
 
 export default ProfileTab;

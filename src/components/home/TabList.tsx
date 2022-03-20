@@ -1,5 +1,6 @@
 import checkLogin from '@/utils/checkLogin';
 import storage from '@/utils/storage';
+import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import Maybe from '../common/Maybe';
@@ -15,7 +16,7 @@ const TabList = () => {
 
   if (!isLoggedIn) {
     return (
-      <ul>
+      <List>
         <li>
           <NavLink href="/" as="/">
             Global Feed
@@ -28,11 +29,11 @@ const TabList = () => {
             </NavLink>
           </li>
         </Maybe>
-      </ul>
+      </List>
     );
   }
   return (
-    <ul>
+    <List>
       <li>
         <NavLink
           href={`/?follow=${currentUser?.username}`}
@@ -51,12 +52,20 @@ const TabList = () => {
       <Maybe test={!!tag}>
         <li>
           <NavLink href={`/?tag=${tag}`} as={`/?tag=${tag}`}>
-            {tag}
+            #{tag}
           </NavLink>
         </li>
       </Maybe>
-    </ul>
+    </List>
   );
 };
+
+const List = styled('ul')`
+  display: flex;
+  li {
+    list-style-type: none;
+    padding: 0.5rem 1rem;
+  }
+`;
 
 export default TabList;

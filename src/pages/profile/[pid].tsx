@@ -2,7 +2,6 @@ import UserAPI from '@/api/user';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import Image from 'next/image';
 import ProfileTab from '@/components/profile/ProfileTab';
 import ArticleList from '@/components/article/ArticleList';
 import styled from '@emotion/styled';
@@ -22,7 +21,7 @@ const Profile = () => {
     <Container>
       <UserInfo>
         <div>
-          <Image
+          <img
             src={data?.profile.image}
             alt="프로필"
             width={100}
