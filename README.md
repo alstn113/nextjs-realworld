@@ -13,4 +13,6 @@ yarn add axios react-query
 // react-hook-form
 yarn add react-hook-form yup @hookform/resolvers
 
-nextjs config 잘 안되서 image를 못쓰겠음
+// reduxtoolkit
+yarn add @reduxjs/toolkit next-redux-wrapper react-redux
+yarn add -D @types/react-redux

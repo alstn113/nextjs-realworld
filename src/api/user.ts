@@ -4,51 +4,51 @@ import clientPrivate from '@/utils/axiosPrivate';
 const UserAPI = {
   current: async () => {
     try {
-      const response = await clientPrivate.get('/user');
-      return response.data;
+      const { data } = await clientPrivate.get('/user');
+      return data;
     } catch (error: any) {
       return error.response;
     }
   },
   signin: async body => {
     try {
-      const response = await client.post('/users/login', {
+      const { data } = await client.post('/users/login', {
         user: body,
       });
-      return response.data;
+      return data;
     } catch (error: any) {
       return error.response;
     }
   },
   signup: async body => {
     try {
-      const response = await client.post('/users', {
+      const { data } = await client.post('/users', {
         user: body,
       });
-      return response.data;
+      return data;
     } catch (error: any) {
       return error.response;
     }
   },
   save: async user => {
     try {
-      const response = await client.put(`/user`, { user });
-      return response.data;
+      const { data } = await client.put(`/user`, { user });
+      return data;
     } catch (error: any) {
       return error.response;
     }
   },
   follow: async username => {
-    const response = await clientPrivate.post(`/profiles/${username}/follow`);
-    return response.data;
+    const { data } = await clientPrivate.post(`/profiles/${username}/follow`);
+    return data;
   },
   unfollow: async username => {
-    const response = await clientPrivate.delete(`/profiles/${username}/follow`);
-    return response.data;
+    const { data } = await clientPrivate.delete(`/profiles/${username}/follow`);
+    return data;
   },
   get: async username => {
-    const response = await client.get(`/profiles/${username}`);
-    return response.data;
+    const { data } = await client.get(`/profiles/${username}`);
+    return data;
   },
 };
 

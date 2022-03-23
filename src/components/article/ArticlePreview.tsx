@@ -1,5 +1,6 @@
 import { IArticle } from '@/types/article.type';
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 interface Pageprops {
   article: IArticle;
@@ -11,7 +12,12 @@ const ArticlePreview = ({ article }: Pageprops) => {
   return (
     <Wrapper>
       <ArticleMeta>
-        <img src={article.author.image} alt="author's profile image" />
+        <Image
+          src={article.author.image}
+          alt="author's profile image"
+          height={32}
+          width={32}
+        />
         <Info>
           <div>{article.author.username}</div>
           <span>{new Date(article.createdAt).toDateString()}</span>
@@ -52,9 +58,7 @@ const ArticleMeta = styled('div')`
   display: flex;
   font-weight: 300;
   img {
-    height: 32px;
-    width: 32px;
-    border-radius: 30px;
+    border-radius: 50%;
   }
 `;
 

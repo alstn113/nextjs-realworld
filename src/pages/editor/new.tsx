@@ -1,49 +1,59 @@
 import styled from '@emotion/styled';
 
-//react-hook-form
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-interface IForminputs {
-  title: string;
-  description: string;
-  body: string;
-}
-
-const schema = yup.object().shape({
-  title: yup.string().required('필수항목'),
-  description: yup.string().required('필수 항목'),
-  body: yup.string().required('필수 항목'),
-});
+import TagInput from '@/components/editor/TagInput';
+import { useAppDispatch, useAppSelector } from '@/app/hook';
+import {
+  selectArticle,
+  setBody,
+  setDescription,
+  setTitle,
+} from '@/features/articleSlice';
 
 const PublishArticleEditor = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IForminputs>({
-    resolver: yupResolver(schema),
-    mode: 'onChange',
-  });
-
-  const onSubmit = async (data: IForminputs) => {
-    console.log(data);
+  const dispatch = useAppDispatch();
+  const article = useAppSelector(selectArticle);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    console.log(article);
   };
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div>title</div>
-        <input {...register('title')} />
-        <p>{errors.title?.message}</p>
-        <div>description</div>
-        <input {...register('description')} />
-        <p>{errors.description?.message}</p>
-        <div>body</div>
-        <input {...register('body')} />
-        <p>{errors.body?.message}</p>
-        <button type="submit">Submit</button>
+      <Form>
+        <fieldset>
+          <fieldset>
+            <input
+              type="text"
+              placeholder="Article Title"
+              value={article.title}
+              onChange={e => dispatch(setTitle(e.target.value))}
+            />
+          </fieldset>
+
+          <fieldset>
+            <input
+              type="text"
+              placeholder="What's this article about?"
+              value={article.description}
+              onChange={e => dispatch(setDescription(e.target.value))}
+            />
+          </fieldset>
+
+          <fieldset>
+            <textarea
+              rows={8}
+              placeholder="Write your article (in markdown)"
+              value={article.body}
+              onChange={e => dispatch(setBody(e.target.value))}
+            />
+          </fieldset>
+
+          <TagInput />
+
+          <button type="button" onClick={handleSubmit}>
+            Publish Article
+          </button>
+        </fieldset>
       </Form>
     </Container>
   );

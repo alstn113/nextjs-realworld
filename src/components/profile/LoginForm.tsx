@@ -43,10 +43,10 @@ const LoginForm = () => {
           if (data.status !== 200) {
             setError(data.errors);
           }
-          console.log(data);
-          if (data?.data?.user) {
-            window.localStorage.setItem('user', JSON.stringify(data.data.user));
-            await queryClient.setQueryData('user', data.data.user);
+          console.log(data?.user);
+          if (data?.user) {
+            window.localStorage.setItem('user', JSON.stringify(data.user));
+            await queryClient.setQueryData('user', data.user);
             router.push('/');
           }
         } catch (error) {

@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import ProfileTab from '@/components/profile/ProfileTab';
 import ArticleList from '@/components/article/ArticleList';
 import styled from '@emotion/styled';
+import Image from 'next/image';
 
 const Profile = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const Profile = () => {
     <Container>
       <UserInfo>
         <div>
-          <img
+          <Image
             src={data?.profile.image}
             alt="프로필"
             width={100}
@@ -48,6 +49,9 @@ const UserInfo = styled('div')`
   p {
     font-size: 1.5rem;
     font-weight: 700;
+  }
+  img {
+    border-radius: 50%;
   }
 `;
 const ArticleWrapper = styled('div')`

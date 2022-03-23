@@ -3,51 +3,57 @@ import clientPrivate from '@/utils/axiosPrivate';
 
 const ArticleAPI = {
   getAll: async (query: any) => {
-    const response = await clientPrivate.get(`/articles`, { params: query });
-    return response.data;
+    const { data } = await clientPrivate.get(`/articles`, { params: query });
+    return data;
   },
   getByAuthor: async (author: string) => {
-    const response = await client.get(`/articles?author=${author}`);
-    return response.data;
+    const { data } = await client.get(`/articles`, {
+      params: { author },
+    });
+    return data;
   },
   getByTag: async (tag: string) => {
-    const response = await client.get(`/articles?tag=${tag}`);
-    return response.data;
+    const { data } = await client.get(`/articles`, {
+      params: { tag },
+    });
+    return data;
   },
   get: async (slug: string) => {
-    const response = await client.get(`/articles/${slug}`);
-    return response.data;
+    const { data } = await client.get(`/articles/${slug}`);
+    return data;
   },
   delete: async (id: number) => {
-    const response = await clientPrivate.delete(`/articles/${id}`);
-    return response.data;
+    const { data } = await clientPrivate.delete(`/articles/${id}`);
+    return data;
   },
   create: async article => {
-    const response = await clientPrivate.post(`/articles`, article);
-    return response.data;
+    const { data } = await clientPrivate.post(`/articles`, article);
+    return data;
   },
   update: async article => {
-    const response = await clientPrivate.put(
+    const { data } = await clientPrivate.put(
       `/articles/${article.slug}`,
       article,
     );
-    return response.data;
+    return data;
   },
   favorite: async (slug: string) => {
-    const response = await client.post(`/articles/${slug}/favorite`);
-    return response.data;
+    const { data } = await client.post(`/articles/${slug}/favorite`);
+    return data;
   },
   unfavorite: async (slug: string) => {
-    const response = await client.delete(`/articles/${slug}/favorite`);
-    return response.data;
+    const { data } = await client.delete(`/articles/${slug}/favorite`);
+    return data;
   },
   favoriteBy: async (author: string) => {
-    const response = await client.get(`/articles?favorited=${author}`);
-    return response.data;
+    const { data } = await client.get(`/articles`, {
+      params: { favorited: author },
+    });
+    return data;
   },
   feed: async () => {
-    const response = await client.get(`/articles/feed`);
-    return response.data;
+    const { data } = await client.get(`/articles/feed`);
+    return data;
   },
 };
 

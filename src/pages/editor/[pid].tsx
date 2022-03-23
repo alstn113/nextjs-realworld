@@ -1,5 +1,9 @@
 const UpdageArticleEditor = () => {
-  return <div>UpdageArticleEditor</div>;
+  return (
+    <div>
+      <div>UpdageArticleEditor</div>
+    </div>
+  );
 };
 
 export default UpdageArticleEditor;
