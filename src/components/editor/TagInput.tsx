@@ -20,15 +20,11 @@ const TagInput = () => {
     }
   };
   const handleTagInputKeyDown = (e: any) => {
-    switch (e.keyCode) {
-      case 13: // Enter
-      case 9: // Tab
-      case 188: // Comma
-        if (e.keyCode !== 9) e.preventDefault();
-        handleAddTag();
-        break;
-      default:
-        break;
+    if (['Enter', 'Tab', 'Comma'].includes(e.key)) {
+      if (e.key !== 'Tab') {
+        e.preventDefault();
+      }
+      handleAddTag();
     }
   };
   return (
