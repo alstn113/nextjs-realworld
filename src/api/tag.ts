@@ -1,8 +1,8 @@
-import client from '@/utils/axios';
+import clientPrivate from '@/utils/axiosPrivate';
 
 const TagAPI = {
   getAllTags: async () => {
-    const { data } = await client.get(`/tags`);
+    const { data } = await clientPrivate.get(`/tags`);
     return data;
   },
 };

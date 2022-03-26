@@ -8,14 +8,29 @@ import {
   setDescription,
   setTitle,
 } from '@/features/articleSlice';
+import { useMutation } from 'react-query';
+import ArticleAPI from '@/api/article';
+import Router from 'next/router';
 
 const PublishArticleEditor = () => {
   const dispatch = useAppDispatch();
   const article = useAppSelector(selectArticle);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(article);
+    mutation.mutate();
   };
+
+  const mutation = useMutation(
+    'postArticle',
+    () => ArticleAPI.create({ article }),
+    {
+      onSuccess: () => {
+        Router.push('/');
+        return;
+      },
+    },
+  );
 
   return (
     <Container>
@@ -50,9 +65,9 @@ const PublishArticleEditor = () => {
 
           <TagInput />
 
-          <button type="button" onClick={handleSubmit}>
+          <Button type="button" onClick={handleSubmit}>
             Publish Article
-          </button>
+          </Button>
         </fieldset>
       </Form>
     </Container>
@@ -64,12 +79,32 @@ const Container = styled('div')`
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  fieldset {
+    margin-bottom: 1rem;
+  }
 `;
 
 const Form = styled('form')`
-  input {
-    border: 1px solid black;
+  input,
+  textarea {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    background-color: #fff;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
   }
+`;
+
+const Button = styled('button')`
+  border-radius: 0.25rem;
+  border: 1px solid black;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1rem;
 `;
 
 export default PublishArticleEditor;

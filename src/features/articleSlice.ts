@@ -19,6 +19,9 @@ export const articleSlice = createSlice({
   name: 'article',
   initialState,
   reducers: {
+    reset: state => {
+      state = initialState;
+    },
     setTitle: (state, action: PayloadAction<string>) => {
       state.title = action.payload;
     },

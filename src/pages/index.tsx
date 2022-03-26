@@ -1,7 +1,11 @@
+import ArticleAPI from '@/api/article';
+import TagAPI from '@/api/tag';
 import Banner from '@/components/home/Banner';
 import MainView from '@/components/home/MainView';
 import Tags from '@/components/home/Tags';
 import styled from '@emotion/styled';
+import { GetServerSideProps, GetServerSidePropsResult } from 'next';
+import { dehydrate, DehydratedState, QueryClient } from 'react-query';
 
 const Home = () => {
   return (
@@ -37,5 +41,20 @@ const Sidebar = styled('div')`
   background: #f3f3f3;
   padding: 5px 10px 10px;
 `;
+
+export const getServerSideProps: GetServerSideProps = async (
+  context,
+): Promise<
+  GetServerSidePropsResult<{
+    dehydratedState: DehydratedState;
+  }>
+> => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['useGetArticle', context.query], () =>
+    ArticleAPI.getAll(context.query),
+  );
+  await queryClient.prefetchQuery('getAllTags', () => TagAPI.getAllTags());
+  return { props: { dehydratedState: dehydrate(queryClient) } };
+};
 
 export default Home;
