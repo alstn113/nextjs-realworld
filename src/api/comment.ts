@@ -1,4 +1,5 @@
 import client from '@/utils/axios';
+import clientPrivate from '@/utils/axiosPrivate';
 
 const CommentAPI = {
   create: async (slug, comment) => {
@@ -20,7 +21,7 @@ const CommentAPI = {
     }
   },
   forArticle: async slug => {
-    const { data } = await client.get(`/articles/${slug}/comments`);
+    const { data } = await clientPrivate.get(`/articles/${slug}/comments`);
     return data;
   },
 };

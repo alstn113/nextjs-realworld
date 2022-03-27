@@ -1,13 +1,11 @@
 import UserAPI from '@/api/user';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useRouter } from 'next/router';
-import { dehydrate, DehydratedState, QueryClient, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import ProfileTab from '@/components/profile/ProfileTab';
 import ArticleList from '@/components/article/ArticleList';
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { GetServerSideProps, GetServerSidePropsResult } from 'next';
-import ArticleAPI from '@/api/article';
 
 const Profile = () => {
   const router = useRouter();
@@ -64,23 +62,5 @@ const ArticleWrapper = styled('div')`
   max-width: 1024px;
   margin: 0 auto;
 `;
-
-export const getServerSideProps: GetServerSideProps = async (
-  context,
-): Promise<
-  GetServerSidePropsResult<{
-    dehydratedState: DehydratedState;
-  }>
-> => {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(['profile', context?.params?.pid], () =>
-    UserAPI.get(context?.params?.pid),
-  );
-  await queryClient.prefetchQuery(['useGetArticle', context.query], () =>
-    ArticleAPI.getAll(context.query),
-  );
-
-  return { props: { dehydratedState: dehydrate(queryClient) } };
-};
 
 export default Profile;

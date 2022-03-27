@@ -1,3 +1,4 @@
+import { IArticleRequest } from '@/types/article.type';
 import client from '@/utils/axios';
 import clientPrivate from '@/utils/axiosPrivate';
 
@@ -18,7 +19,7 @@ const ArticleAPI = {
     });
     return data;
   },
-  get: async (slug: string) => {
+  get: async slug => {
     const { data } = await client.get(`/articles/${slug}`);
     return data;
   },
@@ -26,15 +27,12 @@ const ArticleAPI = {
     const { data } = await clientPrivate.delete(`/articles/${id}`);
     return data;
   },
-  create: async article => {
+  create: async (article: IArticleRequest) => {
     const { data } = await clientPrivate.post(`/articles`, article);
     return data;
   },
-  update: async article => {
-    const { data } = await clientPrivate.put(
-      `/articles/${article.slug}`,
-      article,
-    );
+  update: async (slug: string, article: IArticleRequest) => {
+    const { data } = await clientPrivate.put(`/articles/${slug}`, article);
     return data;
   },
   favorite: async (slug: string) => {

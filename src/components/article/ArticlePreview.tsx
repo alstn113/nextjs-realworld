@@ -1,36 +1,56 @@
 import { IArticle } from '@/types/article.type';
 import styled from '@emotion/styled';
 import Image from 'next/image';
+import Link from 'next/link';
 
-interface Pageprops {
+interface PageProps {
   article: IArticle;
 }
 
-const ArticlePreview = ({ article }: Pageprops) => {
+const ArticlePreview = ({ article }: PageProps) => {
   if (!article) return <div>not exists</div>;
 
   return (
     <Wrapper>
       <ArticleMeta>
-        <Image
-          src={article.author.image}
-          alt="author's profile image"
-          height={32}
-          width={32}
-        />
+        <Link href="/profile/[pid]" as={`/profile/${article.author.username}`}>
+          <a>
+            <Image
+              src={article.author.image}
+              alt="author's profile image"
+              height={32}
+              width={32}
+            />
+          </a>
+        </Link>
         <Info>
-          <div>{article.author.username}</div>
+          <Link
+            href="/profile/[pid]"
+            as={`/profile/${article.author.username}`}
+          >
+            <a>
+              <div>{article.author.username}</div>
+            </a>
+          </Link>
           <span>{new Date(article.createdAt).toDateString()}</span>
         </Info>
         <div>추천 : {article.favoritesCount}</div>
       </ArticleMeta>
-      <h1>{article.title}</h1>
-      <p>{article.description}</p>
+      <Link href="/article/[pid]" as={`/article/${article.slug}`}>
+        <a>
+          <h1>{article.title}</h1>
+          <p>{article.description}</p>
+        </a>
+      </Link>
       <TagList>
         {article.tagList.map((tag, index) => {
           return (
             <li key={index}>
-              <span>{tag}</span>
+              <Link href={`/?tag=${tag}`} as={`/?tag=${tag}`}>
+                <a>
+                  <span>{tag}</span>
+                </a>
+              </Link>
             </li>
           );
         })}

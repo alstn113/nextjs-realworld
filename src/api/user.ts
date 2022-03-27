@@ -30,9 +30,9 @@ const UserAPI = {
       return error.response;
     }
   },
-  save: async user => {
+  update: async user => {
     try {
-      const { data } = await client.put(`/user`, { user });
+      const { data } = await clientPrivate.put(`/user`, { user });
       return data;
     } catch (error: any) {
       return error.response;
