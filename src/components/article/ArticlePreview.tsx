@@ -1,4 +1,4 @@
-import { IArticle } from '@/types/article.type';
+import { IArticle } from '@/interfaces/article.interface';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Link from 'next/link';

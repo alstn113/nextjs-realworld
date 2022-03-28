@@ -1,6 +1,7 @@
 import ArticleAPI from '@/api/article';
 import ArticleMeta from '@/components/article/ArticleMeta';
 import CommentList from '@/components/comment/CommentList';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
@@ -17,7 +18,9 @@ const ArticlePage = () => {
 
   return (
     <div>
-      {!isLoading && (
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
         <>
           <Banner>
             <Container>

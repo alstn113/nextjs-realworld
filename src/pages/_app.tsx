@@ -21,11 +21,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 20 * 1000,
-          },
-        },
+        defaultOptions: {},
       }),
   );
   return (

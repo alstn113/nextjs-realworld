@@ -1,3 +1,4 @@
+import CommentAPI from '@/api/comment';
 import checkLogin from '@/utils/checkLogin';
 import storage from '@/utils/storage';
 import styled from '@emotion/styled';
@@ -5,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 const CommentInput = () => {
   const { data: currentUser } = useQuery('user', () => storage('user'));
@@ -24,7 +25,23 @@ const CommentInput = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    mutation.mutate();
   };
+
+  const mutation = useMutation(
+    'createComment',
+    () =>
+      CommentAPI.create(pid, {
+        comment: {
+          body: content,
+        },
+      }),
+    {
+      onSuccess: () => {
+        queryClient.refetchQueries(['ArticleComment', pid]);
+      },
+    },
+  );
 
   if (!isLoggedIn) {
     return (
@@ -63,7 +80,7 @@ const CommentInput = () => {
   );
 };
 
-const Card = styled('div')`
+const Card = styled('form')`
   margin-bottom: 0.75rem;
   background-color: #fff;
   border-radius: 0.25rem;

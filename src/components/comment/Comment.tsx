@@ -1,4 +1,4 @@
-import { IComment } from '@/types/comment.type';
+import { IComment } from '@/interfaces/comment.interface';
 import checkLogin from '@/utils/checkLogin';
 import storage from '@/utils/storage';
 import styled from '@emotion/styled';
@@ -22,7 +22,7 @@ const Comment = ({ comment }: PageProps) => {
         <p className="card-text">{comment.body}</p>
       </CardBlock>
       <CardFooter>
-        <Link href="profile/[pid]" as={`/profile/${comment.author.username}`}>
+        <Link href="/profile/[pid]" as={`/profile/${comment.author.username}`}>
           <a>
             <Image
               src={comment.author.image}
@@ -33,7 +33,7 @@ const Comment = ({ comment }: PageProps) => {
           </a>
         </Link>
         &nbsp;
-        <Link href="profile/[pid]" as={`/profile/${comment.author.username}`}>
+        <Link href="/profile/[pid]" as={`/profile/${comment.author.username}`}>
           <a>{comment.author.username}</a>
         </Link>
         <span className="date-posted">

@@ -1,4 +1,4 @@
-import { IAuthor } from '@/types/author.type';
+import { IAuthor } from '@/interfaces/author.interface';
 import styled from '@emotion/styled';
 import NavLink from '../common/NavLink';
 

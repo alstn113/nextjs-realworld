@@ -4,7 +4,10 @@ import clientPrivate from '@/utils/axiosPrivate';
 const CommentAPI = {
   create: async (slug, comment) => {
     try {
-      const { data } = await client.post(`/articles/${slug}/comments`, comment);
+      const { data } = await clientPrivate.post(
+        `/articles/${slug}/comments`,
+        comment,
+      );
       return data;
     } catch (error: any) {
       return error.respnose;

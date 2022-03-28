@@ -1,4 +1,4 @@
-import { IArticleRequest } from '@/types/article.type';
+import { IArticleRequest } from '@/interfaces/article.interface';
 import client from '@/utils/axios';
 import clientPrivate from '@/utils/axiosPrivate';
 
@@ -23,7 +23,7 @@ const ArticleAPI = {
     const { data } = await client.get(`/articles/${slug}`);
     return data;
   },
-  delete: async (id: number) => {
+  delete: async (id: any) => {
     const { data } = await clientPrivate.delete(`/articles/${id}`);
     return data;
   },

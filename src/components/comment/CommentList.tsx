@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import CommentInput from '@/components/comment/CommentInput';
 import Comment from '@/components/comment/Comment';
-import { IComment } from '@/types/comment.type';
+import { IComment } from '@/interfaces/comment.interface';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const CommentList = () => {
@@ -19,7 +19,6 @@ const CommentList = () => {
   return (
     <Container>
       <hr />
-      <CommentInput />
       {isLoading ? (
         <LoadingSpinner />
       ) : (
@@ -29,6 +28,7 @@ const CommentList = () => {
           ))}
         </>
       )}
+      <CommentInput />
     </Container>
   );
 };

@@ -1,4 +1,4 @@
-import { IAuthor } from './author.type';
+import { IAuthor } from './author.interface';
 
 export interface IArticleList {
   articles: IArticle[];
