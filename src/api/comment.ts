@@ -12,7 +12,7 @@ const CommentAPI = {
   },
   delete: async (slug, commentId) => {
     try {
-      const { data } = await client.delete(
+      const { data } = await clientPrivate.delete(
         `/articles/${slug}/comments/${commentId}`,
       );
       return data;

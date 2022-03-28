@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import CommentInput from '@/components/comment/CommentInput';
 import Comment from '@/components/comment/Comment';
 import { IComment } from '@/types/comment.type';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const CommentList = () => {
   const router = useRouter();
@@ -12,27 +13,33 @@ const CommentList = () => {
     query: { pid },
   } = router;
 
-  const { data, isLoading, error } = useQuery(['ArticleComment', pid], () =>
+  const { data, isLoading } = useQuery(['ArticleComment', pid], () =>
     CommentAPI.forArticle(pid),
   );
   return (
-    <Styled>
+    <Container>
+      <hr />
       <CommentInput />
-      {!isLoading && (
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
         <>
           {data.comments.map((comment: IComment) => (
             <Comment key={comment.id} comment={comment} />
           ))}
         </>
       )}
-    </Styled>
+    </Container>
   );
 };
 
-const Styled = styled('div')`
-  background: purple;
-  color: white;
-  padding: 1rem;
+const Container = styled('div')`
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
 `;
 
 export default CommentList;

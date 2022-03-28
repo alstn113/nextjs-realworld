@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 const Banner = () => {
   return (
     <Container>
-      <Logo>CLONE PROJECT</Logo>
-      <Text>Learnning FRONTEND </Text>
+      <Logo>NEKO113</Logo>
+      <Text>Learnning JS</Text>
     </Container>
   );
 };

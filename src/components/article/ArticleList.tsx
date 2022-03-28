@@ -1,4 +1,5 @@
 import ArticleAPI from '@/api/article';
+import { IArticle } from '@/types/article.type';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import LoadingSpinner from '../common/LoadingSpinner';
@@ -9,16 +10,14 @@ const ArticleList = () => {
   const { asPath, pathname, query } = router;
   const { favorite, follow, tag, pid } = query;
 
-  const { data, error, isLoading } = useQuery(
-    ['useGetArticle', router.query],
-    () => ArticleAPI.getAll(router.query),
+  const { data, isLoading } = useQuery(['useGetArticle', router.query], () =>
+    ArticleAPI.getAll(router.query),
   );
-  if (error) return <div>{error?.message}</div>;
   if (isLoading) return <LoadingSpinner />;
   const { articles } = data;
   return (
     <div>
-      {articles.map(article => (
+      {articles.map((article: IArticle) => (
         <ArticlePreview key={article.slug} article={article} />
       ))}
     </div>

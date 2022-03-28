@@ -11,35 +11,56 @@ const ArticlePage = () => {
     query: { pid },
   } = router;
 
-  const { data, error, isLoading } = useQuery(['useGetArticle', pid], () =>
+  const { data, isLoading } = useQuery(['useGetArticle', pid], () =>
     ArticleAPI.get(pid),
   );
 
   return (
-    <Styld>
+    <div>
       {!isLoading && (
         <>
-          <div>title : {data.article.title}</div>
-          <ArticleMeta article={data.article} />
-          <div>description : {data.article.description}</div>
-          <div>body : {data.article.body}</div>
-          <div>tag-list</div>
-          {data.article.tagList.map((tag: string) => (
-            <li key={tag}>{tag}</li>
-          ))}
-          <div>
-            <CommentList />
-          </div>
+          <Banner>
+            <Container>
+              <h1>{data.article.title}</h1>
+              <ArticleMeta article={data.article} />
+            </Container>
+          </Banner>
+          <Container>
+            <Body>{data.article.body}</Body>
+            <div>tag-list</div>
+            {data.article.tagList.map((tag: string) => (
+              <li key={tag}>{tag}</li>
+            ))}
+            <div>
+              <CommentList />
+            </div>
+          </Container>
         </>
       )}
-    </Styld>
+    </div>
   );
 };
 
-const Styld = styled('div')`
-  background: gray;
-  color: white;
-  padding: 1rem;
+const Banner = styled('div')`
+  padding: 2rem 0;
+  color: #fff;
+  background: #333;
+  margin-bottom: 2rem;
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+`;
+
+const Container = styled('div')`
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 15px;
+`;
+
+const Body = styled('div')`
+  margin-bottom: 2rem;
 `;
 
 export default ArticlePage;

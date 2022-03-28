@@ -9,20 +9,32 @@ interface PageProps {
 
 const ArticleMeta = ({ article }: PageProps) => {
   return (
-    <Styled>
-      <Image src={article.author.image} alt="" height={50} width={50} />
-      <div>{article.author.username}</div>
-      <div>{article.createdAt}</div>
-
+    <Container>
+      <Image
+        src={article.author.image}
+        alt="profile image"
+        height={50}
+        width={50}
+      />
+      <Info>
+        <div>{article.author.username}</div>
+        <span>{new Date(article.createdAt).toDateString()}</span>
+      </Info>
       <ArticleActions article={article} />
-    </Styled>
+    </Container>
   );
 };
 
-const Styled = styled('div')`
-  background: red;
-  color: white;
-  padding: 1rem;
+const Container = styled('div')`
+  margin-top: 2rem;
+  display: flex;
+  img {
+    border-radius: 50%;
+  }
 `;
 
+const Info = styled('div')`
+  margin-left: 1rem;
+  margin-right: 1rem;
+`;
 export default ArticleMeta;
