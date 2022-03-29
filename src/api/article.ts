@@ -31,7 +31,7 @@ const ArticleAPI = {
     const { data } = await clientPrivate.post(`/articles`, article);
     return data;
   },
-  update: async (slug: string, article: IArticleRequest) => {
+  update: async (slug: any, article: IArticleRequest) => {
     const { data } = await clientPrivate.put(`/articles/${slug}`, article);
     return data;
   },

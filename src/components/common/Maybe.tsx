@@ -4,7 +4,7 @@ interface MaybeProps {
 }
 
 const Maybe = ({ test, children }: MaybeProps) => {
-  return <>{test && children}</>;
+  return test ? <>{children}</> : <></>;
 };
 
 export default Maybe;

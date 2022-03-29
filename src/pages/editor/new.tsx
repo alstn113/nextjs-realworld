@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-
 import TagInput from '@/components/editor/TagInput';
 import { useAppDispatch, useAppSelector } from '@/app/hook';
 import {
+  reset,
   selectArticle,
   setBody,
   setDescription,
@@ -26,6 +26,7 @@ const PublishArticleEditor = () => {
     () => ArticleAPI.create({ article }),
     {
       onSuccess: () => {
+        dispatch(reset());
         Router.push('/');
         return;
       },

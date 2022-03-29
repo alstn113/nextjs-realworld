@@ -19,8 +19,9 @@ export const articleSlice = createSlice({
   name: 'article',
   initialState,
   reducers: {
-    reset: state => {
-      state = initialState;
+    reset: () => initialState,
+    assignState: (state, action: PayloadAction<ArticleState>) => {
+      Object.assign(state, action.payload);
     },
     setTitle: (state, action: PayloadAction<string>) => {
       state.title = action.payload;
@@ -42,7 +43,14 @@ export const articleSlice = createSlice({
   },
 });
 
-export const { setTitle, setDescription, setBody, addTag, removeTag } =
-  articleSlice.actions;
+export const {
+  reset,
+  assignState,
+  setTitle,
+  setDescription,
+  setBody,
+  addTag,
+  removeTag,
+} = articleSlice.actions;
 export const selectArticle = (state: AppState) => state.article;
 export default articleSlice;

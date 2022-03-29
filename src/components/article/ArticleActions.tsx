@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMutation, useQuery } from 'react-query';
+import Maybe from '../common/Maybe';
 
 interface PageProps {
   article: IArticle;
@@ -33,7 +34,7 @@ const ArticleActions = ({ article }: PageProps) => {
   });
 
   return (
-    canModify && (
+    <Maybe test={canModify}>
       <span>
         <Button>
           <Link href={'/editor/[pid]'} as={`/editor/${article.slug}`}>
@@ -42,7 +43,7 @@ const ArticleActions = ({ article }: PageProps) => {
         </Button>
         <Button onClick={handleDelete}>Delete Article</Button>
       </span>
-    )
+    </Maybe>
   );
 };
 
