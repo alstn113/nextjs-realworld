@@ -35,12 +35,12 @@ const ArticleAPI = {
     const { data } = await clientPrivate.put(`/articles/${slug}`, article);
     return data;
   },
-  favorite: async (slug: string) => {
-    const { data } = await client.post(`/articles/${slug}/favorite`);
+  favorite: async (slug: any) => {
+    const { data } = await clientPrivate.post(`/articles/${slug}/favorite`);
     return data;
   },
   unfavorite: async (slug: string) => {
-    const { data } = await client.delete(`/articles/${slug}/favorite`);
+    const { data } = await clientPrivate.delete(`/articles/${slug}/favorite`);
     return data;
   },
   favoriteBy: async (author: string) => {

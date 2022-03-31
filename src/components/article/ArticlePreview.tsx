@@ -1,13 +1,55 @@
+import ArticleAPI from '@/api/article';
 import { IArticle } from '@/interfaces/article.interface';
+import checkLogin from '@/utils/checkLogin';
+import storage from '@/utils/storage';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useMutation, useQuery } from 'react-query';
 
 interface PageProps {
   article: IArticle;
 }
 
 const ArticlePreview = ({ article }: PageProps) => {
+  const { data: currentUser } = useQuery('user', () => storage('user'));
+  const isLoggedIn = checkLogin(currentUser);
+  const router = useRouter();
+
+  const handleClickFavorite = () => {
+    if (!isLoggedIn) {
+      router.push('/user/login');
+    }
+    if (article.favorited) {
+      useUnFavorite.mutate();
+    } else {
+      useFavorite.mutate();
+    }
+  };
+
+  const useFavorite = useMutation(
+    'favorite',
+    () => ArticleAPI.favorite(article.slug),
+    {
+      onSuccess: () => {
+        article.favorited = true;
+        article.favoritesCount += 1;
+      },
+    },
+  );
+
+  const useUnFavorite = useMutation(
+    'unfavorite',
+    () => ArticleAPI.unfavorite(article.slug),
+    {
+      onSuccess: () => {
+        article.favorited = false;
+        article.favoritesCount -= 1;
+      },
+    },
+  );
+
   if (!article) return <div>not exists</div>;
 
   return (
@@ -34,7 +76,13 @@ const ArticlePreview = ({ article }: PageProps) => {
           </Link>
           <span>{new Date(article.createdAt).toDateString()}</span>
         </Info>
-        <div>추천 : {article.favoritesCount}</div>
+
+        <FavoriteButton
+          onClick={handleClickFavorite}
+          isFavorite={article.favorited}
+        >
+          {article.favoritesCount}
+        </FavoriteButton>
       </ArticleMeta>
       <Link href="/article/[pid]" as={`/article/${article.slug}`}>
         <a>
@@ -105,5 +153,15 @@ const TagList = styled('div')`
     color: #aaa;
     background: none;
   }
+`;
+
+const FavoriteButton = styled('button')<{ isFavorite: boolean }>`
+  border-radius: 0.25rem;
+  border: 1px solid black;
+  border-color: #5cb85c;
+  background: ${({ isFavorite }) => (isFavorite ? '#5cb85c' : '#fff')};
+  font-size: 0.5rem;
+  font-weight: 500;
+  padding: 0.5rem;
 `;
 export default ArticlePreview;
