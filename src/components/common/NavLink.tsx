@@ -23,7 +23,7 @@ const NavLink = ({ href, as, children }: NavLinkProps) => {
 };
 
 const StyledLink = styled('a')`
-  color: red;
+  color: green;
 `;
 
 export default NavLink;

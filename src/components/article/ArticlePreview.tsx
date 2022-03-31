@@ -160,6 +160,7 @@ const FavoriteButton = styled('button')<{ isFavorite: boolean }>`
   border: 1px solid black;
   border-color: #5cb85c;
   background: ${({ isFavorite }) => (isFavorite ? '#5cb85c' : '#fff')};
+  color: ${({ isFavorite }) => (isFavorite ? '#fff' : '#000')};
   font-size: 0.5rem;
   font-weight: 500;
   padding: 0.5rem;
