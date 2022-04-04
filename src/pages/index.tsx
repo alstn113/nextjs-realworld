@@ -1,3 +1,4 @@
+import Button from '@/components/common/Button';
 import Modal from '@/components/common/Modal';
 import Banner from '@/components/home/Banner';
 import MainView from '@/components/home/MainView';
@@ -20,10 +21,14 @@ const Home = () => {
     <div>
       <Modal
         visible={modal}
+        title={'포스트 삭제'}
+        message={'정말 삭제하시겠습니까?'}
         onConfirm={handleConfirm}
         onCancel={handleCancel}
       />
-      <button onClick={handleModal}>MODAL</button>
+      <Button size="small" onClick={handleModal}>
+        Test Modal Button
+      </Button>
       <Banner />
       <Container>
         <MainView />

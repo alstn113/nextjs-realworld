@@ -3,6 +3,8 @@ import Button from '@/components/common/Button';
 
 export interface ModalProps {
   visible: boolean;
+  title: string;
+  message: string;
   cancelText?: string;
   confirmText?: string;
   onConfirm: () => void;
@@ -11,6 +13,8 @@ export interface ModalProps {
 
 const Modal = ({
   visible,
+  title,
+  message,
   cancelText = '취소',
   confirmText = '확인',
   onCancel,
@@ -19,9 +23,9 @@ const Modal = ({
   if (!visible) return null;
   return (
     <Fullscreen>
-      <ModalBlock>
-        <h3>포스트 삭제</h3>
-        <p>정말 삭제하시겠습니까?</p>
+      <ModalBlock visible={visible}>
+        <h3>{title}</h3>
+        <p>{message}</p>
         <ButtonArea>
           <Button size="small" onClick={onCancel}>
             {cancelText}
@@ -48,7 +52,7 @@ const Fullscreen = styled('div')`
   align-items: center;
 `;
 
-const ModalBlock = styled('div')`
+const ModalBlock = styled('div')<{ visible: boolean }>`
   width: 25rem;
   background: white;
   padding: 2rem 1.5rem;
@@ -63,6 +67,21 @@ const ModalBlock = styled('div')`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+  @keyframes appear {
+    0% {
+      opacity: 0;
+      transform: translateY(400px) scale(0.75);
+    }
+    75% {
+      opacity: 1;
+      transform: translateY(-16px) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+  animation: 0.5s ease-in-out appear;
 `;
 
 const ButtonArea = styled('div')`
